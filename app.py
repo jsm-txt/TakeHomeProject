@@ -4,10 +4,23 @@ import requests
 from pprint import PrettyPrinter
 from datetime import datetime, timedelta
 from dotenv import load_dotenv
-from flask import Flask, render_template, request, send_file
+from flask import Blueprint, Flask, render_template, request
+
+from flask_pymongo import PyMongo
 
 
 app = Flask(__name__)
+
+class Config(object):
+    DEBUG = True
+    MONGO_URI = os.getenv("MONGO_URI")
+
+app.config.from_object(Config)
+mongo = PyMongo(app)
+db = mongo.db
+main = Blueprint("main", __name__)
+app.register_blueprint(main)
+
 
 load_dotenv()
 API_KEY = os.getenv('API_KEY')
@@ -70,7 +83,13 @@ def results():
 
 @app.route('/reaction')
 def reaction():
-    return render_template('reaction.html')
+    reaction = request.args.get('reaction')
+
+    context = {
+        'reaction': reaction
+    }
+
+    return render_template('reaction.html',**context)
 
 if __name__ == '__main__':
     app.run(debug=True)
