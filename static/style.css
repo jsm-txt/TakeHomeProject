@@ -1,0 +1,18 @@
+body {
+    background-color: #fae2e2;
+    display: flex;
+    justify-content: center;
+
+}
+
+form{
+    background-color: white;
+}
+
+#submit{
+    background-color: #fff3f3;
+    
+}
+#submit:hover{
+    background-color: #ffd6d6;
+}
