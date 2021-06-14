@@ -45,7 +45,9 @@ def results():
     params = {
         'q': city,
   
-        'appid': API_KEY
+        'appid': API_KEY,
+
+        'units': 'imperial'
     }
 
     result_json = requests.get(url, params=params).json()
