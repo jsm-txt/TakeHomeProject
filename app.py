@@ -68,5 +68,9 @@ def results():
 
     return render_template('results.html', **context)
 
+@app.route('/reaction')
+def reaction():
+    return render_template('reaction.html')
+
 if __name__ == '__main__':
     app.run(debug=True)
